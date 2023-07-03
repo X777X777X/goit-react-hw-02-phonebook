@@ -1,0 +1,33 @@
+.list {
+  margin-top: 24px;
+  color: var(--TextColor);
+  font-weight: 500;
+  font-size: 18px;
+}
+
+.item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.item:not(:last-child) {
+  margin-bottom: 12px;
+}
+
+.btn {
+  width: 30px;
+  height: auto;
+  cursor: pointer;
+  display: inline-block;
+  background-image: url(../../img/delete.svg);
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-color: transparent;
+  border: none;
+  outline: none;
+}
+
+.btn:hover {
+  transform: scale(1.3);
+}
