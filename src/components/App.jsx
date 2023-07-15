@@ -3,6 +3,10 @@ import { ContactForm } from './ContactForm/ContactForm';
 import { ContactList } from './ContactList/ContactList';
 import { Filter } from './Filter/Filter';
 import { nanoid } from 'nanoid';
+import { ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import './App.module.css';
 
 export class App extends Component {
@@ -26,7 +30,9 @@ export class App extends Component {
 
     // Проверка наличия контакта с таким же номером
     if (existingContact) {
-      alert(`${name} is already in contacts!`);
+      toast.error(`${name} уже существует в контактах!`);
+    } else if (!this.isValidPhoneNumber(number)) {
+      toast.error('Некорректный формат номера!');
     } else {
       const contact = {
         id: nanoid(),
@@ -56,10 +62,17 @@ export class App extends Component {
     }));
   };
 
+  isValidPhoneNumber = number => {
+    const regexPattern =
+      /^\+?\d{1,4}[-.\s]?\(?\d{1,3}\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}$/;
+    return regexPattern.test(number);
+  };
+
   render() {
     const { filter } = this.state;
     return (
       <section>
+        <ToastContainer autoClose={5000} />
         <h1>Phonebook</h1>
         <ContactForm onSubmit={this.formSubmit} />
         <h2>Contacts</h2>
